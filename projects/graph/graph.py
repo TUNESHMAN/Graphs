@@ -49,7 +49,11 @@ class Graph:
             # I check if queue_item is part of the visited set
             if queue_item not in visited:
                 # Add it to the visited
+                print(queue_item)
                 visited.add(queue_item)
+                for next_visited in self.get_neighbors(queue_item):
+                    # add all its neighbors to the queue
+                    bft_queue.enqueue(next_visited)
 
     def dft(self, starting_vertex):
         """
@@ -68,7 +72,10 @@ class Graph:
             # I check if stack_item is part of the visited set
             if stack_item not in visited:
                 # Add it to the visited
+                print(stack_item)
                 visited.add(stack_item)
+                for next_visited in self.get_neighbors(stack_item):
+                    dft_stack.push(next_visited)
 
     def dft_recursive(self, starting_vertex):
         """
