@@ -37,7 +37,19 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Create an empty queue and enqueue the starting vertex
+        bft_queue = Queue()
+        bft_queue.enqueue(starting_vertex)
+        # Create a set where the visited vertices are kept
+        visited = set()
+        # If there is something on the queue, we want to check each vertex and add it to visited set
+        while bft_queue.size() > 0:
+            # remove the first item from the queue
+            queue_item = bft_queue.dequeue()
+            # I check if queue_item is part of the visited set
+            if queue_item not in visited:
+                # Add it to the visited
+                visited.add(queue_item)
 
     def dft(self, starting_vertex):
         """
