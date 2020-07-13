@@ -23,12 +23,14 @@ class Graph:
         """
         if v1 in self.vertices and v2 in self.vertices:  # I add edge from v1 to v2. However, I first check if they are both in the graph
             self.vertices[v1].add(v2)  # add v2 to v1 set of edges
+        else:
+            raise IndexError("Vertex not found")
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]  # Return the whole set
 
     def bft(self, starting_vertex):
         """
