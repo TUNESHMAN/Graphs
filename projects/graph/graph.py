@@ -15,7 +15,7 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        self.vertices[vertex_id] = set()  #
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
@@ -105,7 +105,7 @@ class Graph:
         while bfs_search.size() > 0:
             # remove the first item from the queue
             bfs_item = bfs_search.dequeue()
-            v = bfs_item[-1]
+            v = bfs_item[-1]  # Get last node out of the path
             if v not in visited:
                 if v == destination_vertex:
                     return bfs_item
