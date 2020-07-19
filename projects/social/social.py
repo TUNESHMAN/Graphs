@@ -1,6 +1,44 @@
+import random
+
+
+class Queue():
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, value):
+        self.queue.append(value)
+
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def size(self):
+        return len(self.queue)
+
+
+class Stack():
+    def __init__(self):
+        self.stack = []
+
+    def push(self, value):
+        self.stack.append(value)
+
+    def pop(self):
+        if self.size() > 0:
+            return self.stack.pop()
+        else:
+            return None
+
+    def size(self):
+        return len(self.stack)
+
+
 class User:
     def __init__(self, name):
         self.name = name
+
 
 class SocialGraph:
     def __init__(self):
@@ -44,9 +82,24 @@ class SocialGraph:
         self.friendships = {}
         # !!!! IMPLEMENT ME
 
-        # Add users
+      # Add users - node / vertex
+        # iterate over users and add them
+        for i in range(0, num_users):
+            self.add_user(f"User {i + 1}")
 
-        # Create friendships
+        target_friendships = (num_users * avg_friendships)
+        total_friendships = 0
+        collisions = 0
+        # if n = 10 then add friendships would be run 10 times
+        while total_friendships < target_friendships:
+            user_id = random.randint(1, self.last_id)  # O(1)
+            friend_id = random.randint(1, self.last_id)  # O(1)
+            if self.add_friendship(user_id, friend_id):
+                total_friendships += 1
+            else:
+                collisions += 1
+
+        print(f"COLLISIONS: {collisions}")
 
     def get_all_social_paths(self, user_id):
         """
@@ -59,6 +112,20 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+        q = Queue()
+        q.enqueue([user_id])
+
+        while q.size() > 0:  # while the queue is not empty
+            path = q.dequeue()
+
+            v = path[-1]
+
+            if v not in visited:
+                visited[v] = path
+                for neighbor in self.friendships[v]:
+                    new_path = path.copy()
+                    new_path.append(neighbor)
+                    q.enqueue(new_path)
         return visited
 
 
